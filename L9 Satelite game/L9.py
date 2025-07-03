@@ -44,3 +44,8 @@ clock.schedule_interval(update_time, 0.1)
     
 
 pgzrun.go()
+
+# git init
+# git add .
+# git commit -m "message"
+# git push
