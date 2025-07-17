@@ -64,7 +64,7 @@ def draw():
         screen.draw.text("GAME OVER", center=(350, 250), fontsize=100)
 
 alien=Actor("alien")
-alien.pos=(100, 250)
+alien.pos=(100, 250)s
 cheese=Actor("cheeze")
 cheese.pos=(800, random.randint(50,450))
 
