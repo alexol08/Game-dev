@@ -8,12 +8,15 @@
 #     hw=file.read()
 #     print(hw)
 import pgzrun
+import random
 
 WIDTH=500
 HEIGHT=500
+current_quest=0
+QUESTIONS=[]
 
 def readfile():
-    QUESTIONS=[]
+    global QUESTIONS
     with open("questions.txt", 'r') as file:
         data=file.readlines()
 
@@ -28,11 +31,42 @@ def readfile():
             QUESTIONS.append(quest_dict)
     print(QUESTIONS)
 
-quest_box=Rect((50,), (200, 100))
+readfile()
+quest_box=Rect((20, 70), (330, 200))
+ans_box1=Rect((10,390), (170, 100))
+ans_box2=Rect((190,390), (170, 100))
+ans_box3=Rect((10,280), (170, 100))
+ans_box4=Rect((190,280), (170, 100))
+skip_box=Rect((380,280), (100, 200))
+timer_box=Rect((380,100), (100, 100))
+text_graph=QUESTIONS[0]
+options=[0,1,2]
 
+text_x=5
 
 def draw():
-    screen.draw.filled_rect(quest_box, color = (255, 255, 255))
+    screen.fill("pink")
+    screen.draw.filled_rect(ans_box1, color = "orange")
+    screen.draw.filled_rect(ans_box2, color = "orange")
+    screen.draw.filled_rect(ans_box3, color = "orange")
+    screen.draw.filled_rect(ans_box4, color = "orange")
+    screen.draw.filled_rect(quest_box, color = "blue")
+    screen.draw.filled_rect(timer_box, color = "blue")
+    screen.draw.filled_rect(skip_box, color = "dark green")
+    screen.draw.textbox(text_graph["options"][0],ans_box1 )
+    screen.draw.textbox(text_graph["options"][1],ans_box2 )
+    screen.draw.textbox(text_graph["options"][2],ans_box3 )
+    screen.draw.textbox(text_graph["options"][3],ans_box4 )
+    screen.draw.textbox(text_graph["question"],quest_box )
+    screen.draw.textbox("SKIP", skip_box)
+    screen.draw.text("Question "+str(current_quest+1)+" out of 10", (text_x, 5), color="black", fontsize=70)
+
+def update():
+    global text_x, text_y
+    text_x -=5
+    if text_x <-550:
+        text_x=550
+    
 
 
 
